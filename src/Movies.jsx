@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import ItemCard from "./components/ItemCard.jsx";
+import ContainerBox from "./components/ContainerBox.jsx";
 
 
 const Movies = () => {
@@ -41,32 +43,15 @@ const Movies = () => {
     // 화면에 보여지는 부분
     return (
 
-        <Container className="mt-5">
+        <ContainerBox >
 
             {/*<button onClick={() => getMovies()}>영화데이터 불러오기</button>*/}
-            <Row>
                 {movies?.map((movie, index) => (
-                    <Col className={"mb-3"}>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`poster ${index + 1}`} />
-                            <Card.Body>
-                                <Card.Title>{movie.title.slice(0, 10)}</Card.Title>
-                                <Card.Text>
-                                    {movie.overview.slice(0, 120)}
-                                </Card.Text>
-                                <Card.Text>
-                                    출시일 :
-                                    {movie.release_date}
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                   <ItemCard data={movie} key={movie.id}/>
 
                 ))}
-            </Row>
 
-        </Container>
+        </ContainerBox>
     );
 };
 
