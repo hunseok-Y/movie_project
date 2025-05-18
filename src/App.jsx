@@ -1,74 +1,72 @@
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
 
-const data = [
-    {
-        "userId": 1,
-        "id": 1,
-        "title": "delectus aut autem",
-        "completed": false
-    },
-    {
-        "userId": 1,
-        "id": 2,
-        "title": "quis ut nam facilis et officia qui",
-        "completed": false
-    },
-    {
-        "userId": 1,
-        "id": 3,
-        "title": "fugiat veniam minus",
-        "completed": false
-    },
-    {
-        "userId": 1,
-        "id": 4,
-        "title": "et porro tempora",
-        "completed": true
-    },
-    {
-        "userId": 1,
-        "id": 5,
-        "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-        "completed": false
-    },
-]
 
 const App = () => {
-
-
-    // String
-    const [name, setName] = useState("Mr. yang");
-
-    //array
+    // state, funtion, variable, etc
     const [movies, setMovies] = useState([])
 
-    console.log(1)
-    const changeName = ()=> {
-        setName("Mr. hoonseok")
-        setMovies(data)
-        console.log(2)
+    // 영화 API를 호출하는 함수
+    const getMovies = async() => {
+        try{
+            const url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+            const options = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Y2NlMjljMjc2MzZmODY0OGM0YzlmNmMyNGQyYTNhOCIsIm5iZiI6MTc0NzU0OTY5Ni41NjMsInN1YiI6IjY4Mjk3ZTAwOWFiODFhZjUwNWY1NTVkYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.TjVbPql5Eg1poQRSZYmAFUyeCkoojguMPja6DCNsTXE'
+                }
+            };
+
+
+            const {data, status} = await axios.get(url, options)
+            console.log(data)
+            console.log(status)
+            if (status === 200) {
+                setMovies(data.results)
+            }
+         } catch(e){
+            console.log(e.message)
+        }
+
+
     }
 
     useEffect(() => {
-        changeName()
-        console.log(3)
+        getMovies()
     }, []);
 
+
+    // 화면에 보여지는 부분
     return (
-        <div>
-            <h1>hello world</h1>
-            <h2>{name}</h2>
-            <h3>{movies.length}</h3>
-            {movies?.map((movie, index)=> (
-                <div key={index}>
-                    <h1>{movie.title}</h1>
-                    <h2>{movie.completed ? "완료" : "완료되지 않음"}</h2>
-                </div>
+
+        <Container className="mt-5">
+
+            {/*<button onClick={() => getMovies()}>영화데이터 불러오기</button>*/}
+            <Row>
+            {movies?.map((movie, index) => (
+                <Col className={"mb-3"}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={`poster ${index + 1}`} />
+                    <Card.Body>
+                        <Card.Title>{movie.title.slice(0, 10)}</Card.Title>
+                        <Card.Text>
+                            {movie.overview.slice(0, 120)}
+                        </Card.Text>
+                        <Card.Text>
+                            출시일 :
+                            {movie.release_date}
+                        </Card.Text>
+                        <Button variant="primary">Go somewhere</Button>
+                    </Card.Body>
+                </Card>
+                </Col>
+
             ))}
+            </Row>
 
-
-            <button onClick={changeName}>버튼</button>
-        </div>
+        </Container>
     );
 };
 
