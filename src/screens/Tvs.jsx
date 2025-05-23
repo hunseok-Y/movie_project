@@ -52,7 +52,7 @@ const Tvs = () => {
 
         <ContainerBox>
                 {tvList?.map((tv, index) => (
-                    <ItemCard data={tv} key={tv.id}/>
+                    <ItemCard data={tv} origin={"tv"} key={tv.id}/>
                 ))}
         </ContainerBox>
     );

@@ -13,6 +13,8 @@ const NavMenus = () => {
                     <Nav className="me-auto">
                         <Nav.Link onClick={() => navigate("/")}>Movie</Nav.Link>
                         <Nav.Link onClick={() => navigate("/tv")}>Tv</Nav.Link>
+                        <Nav.Link onClick={() => navigate("/shop")}>Shop</Nav.Link>
+                        <Nav.Link onClick={() => navigate("/actors")}>Actors</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">
