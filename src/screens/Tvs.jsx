@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Card, Carousel, Col, Container, Row} from "react-bootstrap";
 import * as PropTypes from "prop-types";
-import ItemCard from "./components/ItemCard.jsx";
-import ContainerBox from "./components/ContainerBox.jsx";
+import ItemCard from "../components/ItemCard.jsx";
+import ContainerBox from "../components/ContainerBox.jsx";
 
 function ExampleCarouselImage(props) {
     return null;

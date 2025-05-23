@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
-import ItemCard from "./components/ItemCard.jsx";
-import ContainerBox from "./components/ContainerBox.jsx";
+import ItemCard from "../components/ItemCard.jsx";
+import ContainerBox from "../components/ContainerBox.jsx";
 
 
 const Movies = () => {
@@ -31,8 +31,6 @@ const Movies = () => {
         } catch(e){
             console.log(e.message)
         }
-
-
     }
 
     useEffect(() => {
@@ -42,15 +40,10 @@ const Movies = () => {
 
     // 화면에 보여지는 부분
     return (
-
         <ContainerBox >
-
-            {/*<button onClick={() => getMovies()}>영화데이터 불러오기</button>*/}
-                {movies?.map((movie, index) => (
-                   <ItemCard data={movie} key={movie.id}/>
-
-                ))}
-
+            {movies?.map((movie, index) => (
+               <ItemCard data={movie} key={movie.id}/>
+            ))}
         </ContainerBox>
     );
 };
