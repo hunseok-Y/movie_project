@@ -13,7 +13,7 @@ const ItemCard = ({data}) => {
                     </Card.Text>
                     <Card.Text>
                         출시일 :
-                        {data.release_date}
+                        {data.release_date ? data.release_date : data.first_air_date}
                     </Card.Text>
                     <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
